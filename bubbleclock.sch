@@ -251,21 +251,21 @@ Wire Wire Line
 Wire Wire Line
 	7500 2100 7850 2100
 Text Label 7850 1400 2    50   ~ 0
-AA
-Text Label 7850 1500 2    50   ~ 0
-AB
-Text Label 7850 1600 2    50   ~ 0
 AC
-Text Label 7850 1700 2    50   ~ 0
-AD
-Text Label 7850 1800 2    50   ~ 0
-AE
-Text Label 7850 1900 2    50   ~ 0
-AF
-Text Label 7850 2000 2    50   ~ 0
-AG
-Text Label 7850 2100 2    50   ~ 0
+Text Label 7850 1500 2    50   ~ 0
 ADP
+Text Label 7850 1600 2    50   ~ 0
+AA
+Text Label 7850 1700 2    50   ~ 0
+AE
+Text Label 7850 1800 2    50   ~ 0
+AD
+Text Label 7850 1900 2    50   ~ 0
+AG
+Text Label 7850 2000 2    50   ~ 0
+AB
+Text Label 7850 2100 2    50   ~ 0
+AF
 Entry Wire Line
 	7850 1400 7950 1500
 Entry Wire Line
@@ -594,28 +594,14 @@ Wire Wire Line
 $Comp
 L power:GND #PWR011
 U 1 1 5BFF3AA8
-P 4400 2450
-F 0 "#PWR011" H 4400 2200 50  0001 C CNN
-F 1 "GND" H 4405 2277 50  0000 C CNN
-F 2 "" H 4400 2450 50  0001 C CNN
-F 3 "" H 4400 2450 50  0001 C CNN
-	1    4400 2450
+P 4450 2750
+F 0 "#PWR011" H 4450 2500 50  0001 C CNN
+F 1 "GND" H 4455 2577 50  0000 C CNN
+F 2 "" H 4450 2750 50  0001 C CNN
+F 3 "" H 4450 2750 50  0001 C CNN
+	1    4450 2750
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4000 1750 4400 1750
-Wire Wire Line
-	4400 1750 4400 1850
-Wire Wire Line
-	4000 1850 4400 1850
-Connection ~ 4400 1850
-Wire Wire Line
-	4000 1950 4400 1950
-Wire Wire Line
-	4400 1850 4400 1950
-Connection ~ 4400 1950
-Wire Wire Line
-	4400 1950 4400 2450
 Text Label 4250 1450 2    50   ~ 0
 TXD
 Text Label 4250 1350 2    50   ~ 0
@@ -666,29 +652,16 @@ Wire Wire Line
 Text Label 6350 1900 0    50   ~ 0
 CS
 Wire Wire Line
-	4600 2250 4600 2100
-Wire Wire Line
-	4000 2250 4600 2250
+	4000 2250 4450 2250
 $Comp
 L Device:R R5
 U 1 1 5C02C037
-P 4600 1950
-F 0 "R5" H 4670 1996 50  0000 L CNN
-F 1 "10K" H 4670 1905 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4530 1950 50  0001 C CNN
-F 3 "~" H 4600 1950 50  0001 C CNN
-	1    4600 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3V3 #PWR013
-U 1 1 5C02C087
-P 4600 1800
-F 0 "#PWR013" H 4600 1650 50  0001 C CNN
-F 1 "+3V3" H 4615 1973 50  0000 C CNN
-F 2 "" H 4600 1800 50  0001 C CNN
-F 3 "" H 4600 1800 50  0001 C CNN
-	1    4600 1800
+P 4450 2500
+F 0 "R5" H 4520 2546 50  0000 L CNN
+F 1 "10K" H 4520 2455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4380 2500 50  0001 C CNN
+F 3 "~" H 4450 2500 50  0001 C CNN
+	1    4450 2500
 	1    0    0    -1  
 $EndComp
 Connection ~ 6450 1900
@@ -1186,18 +1159,18 @@ Connection ~ 4900 6100
 $Comp
 L Device:R R16
 U 1 1 5C280A8A
-P 9450 3000
-F 0 "R16" V 9400 2850 50  0000 C CNN
-F 1 "330" V 9400 3150 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 9380 3000 50  0001 C CNN
-F 3 "~" H 9450 3000 50  0001 C CNN
-	1    9450 3000
+P 9350 3000
+F 0 "R16" V 9350 3000 50  0000 C CNN
+F 1 "330" V 9300 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 9280 3000 50  0001 C CNN
+F 3 "~" H 9350 3000 50  0001 C CNN
+	1    9350 3000
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	9100 3000 9300 3000
+	9100 3000 9200 3000
 Wire Wire Line
-	9600 3000 9700 3000
+	9500 3000 9700 3000
 $Comp
 L power:GND #PWR0101
 U 1 1 5C293169
@@ -1236,6 +1209,65 @@ Wire Wire Line
 	2650 6300 2650 6200
 Wire Wire Line
 	2650 6200 2950 6200
+Text Label 8850 3200 0    50   ~ 0
+C1
+Text Label 8850 3300 0    50   ~ 0
+C2
+Text Label 8850 3400 0    50   ~ 0
+C3
+Text Label 8850 3500 0    50   ~ 0
+C4
+Text Label 8850 3600 0    50   ~ 0
+C5
+Text Label 8850 3700 0    50   ~ 0
+C6
+Text Label 8850 3800 0    50   ~ 0
+C7
+Text Label 8850 3900 0    50   ~ 0
+C8
+Text Label 8850 4000 0    50   ~ 0
+C9
+Text Label 8850 4100 0    50   ~ 0
+C10
+Text Label 8850 4200 0    50   ~ 0
+C11
+Text Label 8850 4300 0    50   ~ 0
+C12
+Text Label 8850 4400 0    50   ~ 0
+C13
+Text Label 8850 4500 0    50   ~ 0
+C14
+Text Label 9450 2300 0    50   ~ 0
+AA'
+Text Label 9450 2400 0    50   ~ 0
+AB'
+Text Label 9450 2500 0    50   ~ 0
+AC'
+Text Label 9450 2600 0    50   ~ 0
+AD'
+Text Label 9450 2700 0    50   ~ 0
+AE'
+Text Label 9450 2800 0    50   ~ 0
+AF'
+Text Label 9450 2900 0    50   ~ 0
+AG'
+Text Label 9600 3000 0    50   ~ 0
+ADP'
+Text Label 7500 2650 1    50   ~ 0
+CHAIN1
+Text Label 7500 4500 1    50   ~ 0
+CHAIN2
+Text Label 3550 4200 0    50   ~ 0
+RTS'
+Text Label 3550 4800 0    50   ~ 0
+DTR'
+Wire Wire Line
+	4450 2250 4450 2350
+Wire Wire Line
+	4450 2650 4450 2750
+NoConn ~ 4000 1750
+NoConn ~ 4000 1850
+NoConn ~ 4000 1950
 Wire Bus Line
 	7950 1500 7950 2200
 Wire Bus Line
