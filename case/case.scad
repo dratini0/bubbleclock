@@ -81,10 +81,10 @@ battery_len = 65;
 battery_padding_len = 3;
 
 // screw hole
-screw_hole_dia = 3; // M3
-screw_nut_dia = 6.4 + 0.2;
-screw_nut_height = 2.4;
-screw_hole_pos = [5, 5, 0];
+screw_hole_dia = 5; // M3
+screw_nut_dia = 9.2;// + 0.2;
+screw_nut_height = 4;
+screw_hole_pos = [6, 11, 0];
 
 module battery(){
     translate([battery_dia / 2, battery_dia / 2])
@@ -218,7 +218,10 @@ screen_driver_assembly_placement + screen_driver_assembly,
 echo(totalboxsize);
 
 module screw(){
+    // threaded rod
     cylinder(h = long_extension, d = screw_hole_dia);
+    // nut
+    rotate([0, 0, 90])
     translate([0, 0, totalboxsize.z - screw_nut_height])
     linear_extrude(long_extension)
     reg_polygon(6, screw_nut_dia / 2);
