@@ -77,8 +77,7 @@ driver_switch_hole_width = 2;
 
 // battery (standard 18650)
 battery_dia = 18 + 1;
-battery_len = 65;
-battery_padding_len = 5;
+battery_len = 65 + 5;
 
 // screw hole
 screw_hole_dia = 5 + 1; // M3
@@ -88,10 +87,10 @@ screw_hole_pos = [screw_nut_dia / 2 * cos(30), 11, 0];
 
 module battery(){
     translate([battery_dia / 2, battery_dia / 2])
-    cylinder(h = battery_len + battery_padding_len, d = battery_dia);
+    cylinder(h = battery_len, d = battery_dia);
 }
 
-battery = [battery_dia, battery_dia, battery_len + battery_padding_len];
+battery = [battery_dia, battery_dia, battery_len];
 
 //battery();
 
@@ -253,6 +252,9 @@ module box_with_holes(){
         translate(bms_placement) bms();
         translate(battery_placement) battery();
         translate(screw_hole_pos) screw();
+        // wiring hole
+        translate(screen_driver_assembly_placement + [screen_driver_assembly_usable_area_1.x, screen_driver_assembly_usable_area_2.y, 0] + [0, wall.y + bms_back_parts + bms_thickness + bms_parts, 0])
+        cube([screen_driver_assembly_usable_area_2.x - screen_driver_assembly_usable_area_1.x + wall.x + (bms_width - bms_usb_width) / 2, battery_placement.y - bms_placement.y - bms_back_parts - bms_thickness - bms_parts, battery_len]);
     }
 }
 
@@ -268,9 +270,6 @@ module lower_part() {
         linear_extrude(long_extension, convexity = 2)
         projection()
         bms();
-        // wiring hole
-        translate(screen_driver_assembly_placement + screen_driver_assembly_usable_area_2 + [0, wall.y + bms_back_parts + bms_thickness + bms_parts, 0])
-        cube([wall.x + (bms_width - bms_usb_width) / 2, battery_placement.y - bms_placement.y - bms_back_parts - bms_thickness - bms_parts, long_extension]);
     }
 }
 
@@ -284,12 +283,6 @@ module cap() {
             translate([0, 0, totalboxsize.z - cap_split])
             cube([totalboxsize.x, totalboxsize.y, cap_split]);
         }
-        // add some retention to the BMS. I have no idea how that will print, but worst comes to worst,
-        // I will just break it off, an replace it with PMMA.
-        translate(bms_placement + dotmul(bms, [0, 0, 1]))
-        linear_extrude((totalboxsize - bms_placement - bms).z - cap_split, convexity = 2)
-        projection()
-        bms();
     }
 }
 
