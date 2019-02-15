@@ -21,12 +21,12 @@ long_extension = 100;
 cap_split = 20;
 
 // BMS
-bms_thickness = 1.1;
-bms_length = 27.9;
-bms_width = 17.2;
-bms_parts = 2;
-bms_back_parts = 0.5;
-bms_usb_height = 3;
+bms_thickness = 1.1 + 0.2;
+bms_length = 27.9 + 1;
+bms_width = 17.2 + 0.5;
+bms_parts = 2 + 1;
+bms_back_parts = 0.5 + 0.5;
+bms_usb_height = 3 + 1;
 bms_usb_underhang = 0.3;
 bms_usb_width = 8;
 bms_porch = 0.5;
@@ -34,57 +34,57 @@ bms_porch = 0.5;
 // FIND SPECS
 
 // screen
-screen_pcb_thickness = 1.6;
-screen_pcb_length = 60.8;
-screen_pcb_width = 18.4;
-screen_pcb_end_porch = 1.5;
-screen_pcb_top_porch = 1.6;
-screen_bubble_thickness = 3.3;
-screen_rail_thickness = 2.9;
+screen_pcb_thickness = 1.6 + 0.2;
+screen_pcb_length = 60.8 + 2;
+screen_pcb_width = 18.4 + 1;
+screen_pcb_end_porch = 1.5 - 0.2;
+screen_pcb_top_porch = 1.6 - 0.2;
+screen_bubble_thickness = 3.3 + 0.3;
 screen_right_edge_to_last_connector_center = 4.9;
-screen_bottom_edge_to_connector_center = 2.18;
-screen_window_thickness = 2;
+screen_bottom_edge_to_connector_center = 2.18 + 0.5;
+screen_window_thickness = 2 + 0.2;
 screen_window_lip = 1;
-screen_window_bottom_porch = 3.5;
+screen_window_bottom_porch = 3.5 - 0.2;
 
 // connector
 connector_pitch = 100 * mil;
 connector_pins = 22;
-connector_screen_center_to_driver_face = 100 * mil + 150 * mil;
+connector_length = connector_pitch * connector_pins + 1;
+connector_screen_center_to_driver_face = 180 * mil;
 // https://hu.mouser.com/datasheet/2/418/NG_CD_644694_E2-1257639.pdf
 connector_driver_center_to_screen_face = 8.7 + 92 * mil / 2;
-connector_width = 2.5;
+connector_width = 2.5 + 0.5;
 
 // driver
-driver_thickness = 0.8 + 0.1; // 1.6 +- 10%
-driver_length = 57.15 + 0.2;
-driver_width = 22.86 + 0.2;
-driver_programming_connector_height = 4.4;
+driver_thickness = 1.6 + 0.3;
+driver_length = 57.15 + 2;
+driver_width = 22.86 + 1;
+driver_programming_connector_height = 4.4 + 1;
 driver_programming_connector_extension = 2.5;
 driver_top_component_height = 2.3 + 0.8;
 // https://datasheet.lcsc.com/szlcsc/Ai-Thinker-ESP-12F-ESP8266MOD_C82891.pdf
 driver_bottom_component_height = 2.7;
 // http://www.ti.com/lit/ds/symlink/sn74hc595.pdf
 driver_front_porch = 0.6;
-driver_back_top_porch = 0.5;
 // protrusion for switch, maybe add lever?
-driver_back_bottom_porch = -1;
+driver_back_top_porch = -1;
+driver_back_bottom_porch = 0.5;
 driver_right_edge_to_last_connector_center = 1.9;
-driver_front_edge_to_connector_center = 1.9;
+driver_front_edge_to_connector_center = 1.9 + 0.5;
 driver_switch_hole_position = 3 - 1;
 driver_switch_hole_length = 4 + 2;
 driver_switch_hole_width = 2;
 
 // battery (standard 18650)
-battery_dia = 18;
+battery_dia = 18 + 1;
 battery_len = 65;
-battery_padding_len = 3;
+battery_padding_len = 5;
 
 // screw hole
-screw_hole_dia = 5; // M3
-screw_nut_dia = 9.2;// + 0.2;
+screw_hole_dia = 5 + 1; // M3
+screw_nut_dia = 9.2 + 0.2;
 screw_nut_height = 4;
-screw_hole_pos = [6, 11, 0];
+screw_hole_pos = [screw_nut_dia / 2 * cos(30), 11, 0];
 
 module battery(){
     translate([battery_dia / 2, battery_dia / 2])
@@ -107,7 +107,7 @@ module driver() {
         translate([- driver_thickness - driver_bottom_component_height, driver_front_porch, 0])
         cube([driver_bottom_component_height, driver_width - driver_front_porch - driver_back_bottom_porch, driver_length]);
         // switch cutout
-        translate([- driver_thickness - driver_switch_hole_width, driver_width - driver_back_bottom_porch, driver_switch_hole_position])
+        translate([0, driver_width - driver_back_top_porch, driver_switch_hole_position])
         cube([driver_switch_hole_width, long_extension, driver_switch_hole_length]);
     }
 }
@@ -133,7 +133,6 @@ module screen() {
 
 //screen();
 
-connector_length = connector_pitch * connector_pins;
 module connector() {
     translate([0, 0, - connector_pitch / 2]) {
         //driver side
@@ -167,7 +166,7 @@ screen_pcb_thickness + screen_bubble_thickness + screen_window_thickness,
 
 screen_driver_assembly = [
 screen_pcb_width - screen_bottom_edge_to_connector_center + connector_screen_center_to_driver_face + driver_thickness + driver_bottom_component_height,
-driver_width - min(0, driver_back_bottom_porch) - driver_front_edge_to_connector_center + connector_driver_center_to_screen_face + screen_pcb_thickness + screen_bubble_thickness + screen_window_thickness,
+driver_width - min(0, driver_back_bottom_porch, driver_back_top_porch) - driver_front_edge_to_connector_center + connector_driver_center_to_screen_face + screen_pcb_thickness + screen_bubble_thickness + screen_window_thickness,
 max(driver_right_edge_to_last_connector_center + driver_programming_connector_extension, screen_right_edge_to_last_connector_center) +
 max(driver_length - driver_right_edge_to_last_connector_center, screen_pcb_length - screen_right_edge_to_last_connector_center),
 ];
