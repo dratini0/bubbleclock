@@ -85,6 +85,10 @@ screw_nut_dia = 9.2 + 0.2;
 screw_nut_height = 4;
 screw_hole_pos = [screw_nut_dia / 2 * cos(30), 11, 0];
 
+// sample
+sample_height = 15;
+sample_thickness = 3;
+
 module battery(){
     translate([battery_dia / 2, battery_dia / 2])
     cylinder(h = battery_len, d = battery_dia);
@@ -273,8 +277,6 @@ module lower_part() {
     }
 }
 
-lower_part();
-
 module cap() {
     union(){
         // take off bottom of the box
@@ -286,6 +288,22 @@ module cap() {
     }
 }
 
-translate(dotmul(totalboxsize, [2.1, 0, 1]))
-rotate([0, 180, 0])
-cap();
+module cap_placed() {
+    translate(dotmul(totalboxsize, [1, 0, 1]))
+    rotate([0, 180, 0])
+    cap();
+}
+
+module sample() {
+    translate([0, 0, -sample_height])
+    intersection() {
+        lower_part();
+        translate([-long_extension, -long_extension, sample_height])
+        cube([2 * long_extension, 2 * long_extension, sample_thickness]);
+    }
+}
+
+
+//lower_part();
+//cap_placed();
+sample();
