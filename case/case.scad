@@ -11,8 +11,8 @@ module box_between(a, b) {
 }
 
 // configuration
-$fs = 0.05;
-$fa = 1;
+$fs = 0.2;
+$fa = 5;
 
 // unit: mm
 mil = 0.0254;
@@ -42,6 +42,7 @@ screen_pcb_top_porch = 1.6 - 0.2;
 screen_bubble_thickness = 3.3 + 0.3;
 screen_right_edge_to_last_connector_center = 4.9;
 screen_bottom_edge_to_connector_center = 2.18 + 0.5;
+// Lasercut a 60mm*14.5mm piece of acrylic 2mm thick
 screen_window_thickness = 2 + 0.2;
 screen_window_lip = 1;
 screen_window_bottom_porch = 3.5 - 0.2;
@@ -237,7 +238,7 @@ module box_with_battery_hole() {
     union(){
         difference(){
             translate(totalboxsize / 2)
-            roundedBox(totalboxsize, wall.x, sidesonly = true);
+            roundedBox(totalboxsize, wall.x);
             translate(battery_placement) cube(battery);
         }
         translate(battery_placement){
@@ -304,6 +305,6 @@ module sample() {
 }
 
 
-//lower_part();
+lower_part();
 //cap_placed();
-sample();
+//sample();
