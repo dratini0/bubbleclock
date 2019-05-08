@@ -31,9 +31,6 @@ _autosave-*
 
 # End of https://www.gitignore.io/api/kicad
 
-# Case
-.stl
-
 # Gerbers
 gerber/
 
