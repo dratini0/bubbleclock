@@ -5,7 +5,8 @@ It uses a separate battery charging and protection circuit, but has an internal 
 
 ## Roadmap
 
-[x] Redesign with looser tolerances
-[ ] Design and print case
-[ ] Solder board
-[ ] Finish MicroPython firmware, or develop native
+- [x] Redesign with looser tolerances
+- [x] Design and print case
+- [x] Solder board
+- [x] Finish MicroPython firmware, or develop native
+  - [ ] Fix flickering issue
